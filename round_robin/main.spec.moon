@@ -1,4 +1,4 @@
-import rotate_and_retrieve from require 'main'
+import round_robin from require 'main'
 describe "Testing tables's round-robin", ->
   local uscore
 
@@ -15,10 +15,8 @@ describe "Testing tables's round-robin", ->
       {"3-one", "3-two"}
       {"4-one", "4-two", "4-three"}
     }
-    result = {}
-    while not uscore.is_empty(files)
-      file, files = rotate_and_retrieve files
-      table.insert result, file
+
+    result = round_robin files
 
     expected = {
       "4-three", "3-two", "2-one", "1-four", 

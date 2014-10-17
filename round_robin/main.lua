@@ -40,6 +40,16 @@ rotate_and_retrieve = function(files)
   end
   return f_popped, files
 end
+local round_robin
+round_robin = function(files)
+  local result = { }
+  while not uscore.is_empty(files) do
+    local file
+    file, files = rotate_and_retrieve(files)
+    table.insert(result, file)
+  end
+  return result
+end
 local _ = [[files = {}
 while true
   if next(files) == nil then
@@ -51,6 +61,5 @@ while true
     p files
 ]]
 return {
-  generate_dummy_data = generate_dummy_data,
-  rotate_and_retrieve = rotate_and_retrieve
+  round_robin = round_robin
 }

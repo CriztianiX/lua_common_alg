@@ -1,7 +1,7 @@
-local rotate_and_retrieve
+local round_robin
 do
   local _obj_0 = require('main')
-  rotate_and_retrieve = _obj_0.rotate_and_retrieve
+  round_robin = _obj_0.round_robin
 end
 return describe("Testing tables's round-robin", function()
   local uscore
@@ -32,12 +32,7 @@ return describe("Testing tables's round-robin", function()
         "4-three"
       }
     }
-    local result = { }
-    while not uscore.is_empty(files) do
-      local file
-      file, files = rotate_and_retrieve(files)
-      table.insert(result, file)
-    end
+    local result = round_robin(files)
     local expected = {
       "4-three",
       "3-two",

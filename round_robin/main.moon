@@ -1,7 +1,7 @@
 import p from require "moon"
 uscore = require 'underscore'
 
-generate_dummy_data = () ->
+generate_dummy_data = ->
   {
     {"1-one", "1-two", "1-three"}
     {"2-one"}
@@ -23,6 +23,15 @@ rotate_and_retrieve = (files) ->
 
   return f_popped, files
 
+round_robin = (files) ->
+  result = {}
+  while not uscore.is_empty(files)
+    file, files = rotate_and_retrieve files
+    table.insert result, file
+
+  return result
+
+
 
 [[
 files = {}
@@ -35,4 +44,4 @@ while true
     p file
     p files
 ]]
-{ :generate_dummy_data, :rotate_and_retrieve }
+{ :round_robin }
